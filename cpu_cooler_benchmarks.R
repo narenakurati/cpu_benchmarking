@@ -8,16 +8,6 @@ stock_blender <- read.csv("blender_2_stock.csv")
 noctua_cine <- read.csv("cine_1_noctua.csv")
 noctua_blender <- read.csv("blender_1_noctua.csv")
 
-# names(data) <- data[1,]; data <- data[-1,]
-# colnames(data) <- make.unique(names(data))
-# store <- data.frame(time = rep(NA, nrow(data)))
-# for (i in 1:nrow(data)){
-#   store$time[i] <- unlist(strsplit(data$Time[i],' '))[2]
-# }
-# store$time <- times(store$time)
-# data$formatted_time <- store$time
-
-
 # Stock Cine --------------------------------------------------------------
 names(stock_cine) <- stock_cine[1,]; stock_cine <- stock_cine[-1,]
 colnames(stock_cine) <- make.unique(names(stock_cine))
@@ -95,23 +85,24 @@ ggplot(data = cine, aes(x = second, y = temp)) + geom_point(aes(color=cooler)) +
   xlab("time (s)") +
   ylab("temperature (˚C)") +
   scale_color_manual(values=c("#1289A7", "#ED4C67"))
-#ggsave(file="cine_temp.svg", plot=image, width=21, height=9)
+ggsave(file="cine_temp.svg", width=10, height=5)
   
 ggplot(data = cine, aes(x = second, y = fan_speed)) + geom_point(aes(color=cooler)) +
   scale_y_continuous(breaks = seq(min(cine$fan_speed), max(cine$fan_speed), 100), limits = c(min(cine$fan_speed), max(cine$fan_speed))) +
-  ggtitle("Cinebench R20 CPU Fan Speed by Cooler") +
+  ggtitle("Cinebench R20 CPU Fan Speeds by Cooler") +
   xlab("time (s)") +
   ylab("fan speed (RPM)") +
   scale_color_manual(values=c("#1289A7", "#ED4C67"))
+ggsave(file="cine_fan_speed.svg", width=10, height=5)
 
 ggplot(data = cine, aes(x = second, y = avg_core_speed)) + geom_point(aes(color=cooler)) +
   scale_y_continuous(breaks = seq(min(cine$avg_core_speed), max(cine$avg_core_speed), 50), limits = c(min(cine$avg_core_speed), max(cine$avg_core_speed))) +
-  ggtitle("Cinebench R20 CPU Clock Speed by Cooler") +
+  ggtitle("Cinebench R20 CPU Clock Speeds by Cooler") +
   xlab("time (s)") +
   ylab("clock speed (MHz)") +
   scale_color_manual(values=c("#1289A7", "#ED4C67"))
+ggsave(file="cine_clock_speed.svg", width=10, height=5)
 
-seq(min(cine$avg_core_speed), max(cine$avg_core_speed), 50)
 
 # Stock Blender -----------------------------------------------------------
 names(stock_blender) <- stock_blender[1,]; stock_blender <- stock_blender[-1,]
