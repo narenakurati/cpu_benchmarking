@@ -48,9 +48,6 @@ noctua_cine$second
 
 
 # CINE -------------------------------------------------------------------
-# stock_cine$cat <- rep("stock")
-# noctua_cine$cat <- rep("noctua")
-
 stock_cine_subset <- data.frame(second = stock_cine$second,
                    temp = stock_cine$`CPU Package.1`,
                    fan_speed = stock_cine$`Fan #2`,
@@ -144,5 +141,55 @@ noctua_blender$second
 
 
 # BLENDER -----------------------------------------------------------------
+stock_blender_subset <- data.frame(second = stock_blender$second,
+                                temp = stock_blender$`CPU Package.1`,
+                                fan_speed = stock_blender$`Fan #2`,
+                                avg_core_speed = rowMeans(apply(as.matrix(stock_blender[,c("CPU Core #1.2",
+                                                                                        "CPU Core #2.2",
+                                                                                        "CPU Core #3.2",
+                                                                                        "CPU Core #4.2",
+                                                                                        "CPU Core #5.2",
+                                                                                        "CPU Core #6.2")]), 2, as.numeric)),
+                                cooler = rep("stock", nrow(stock_blender)),
+                                noise = rep(55.28, nrow(stock_blender)))
 
+noctua_blender_subset <- data.frame(second = noctua_blender$second,
+                                  temp = noctua_blender$`CPU Package.1`,
+                                  fan_speed = noctua_blender$`Fan #2`,
+                                  avg_core_speed = rowMeans(apply(as.matrix(noctua_blender[,c("CPU Core #1.2",
+                                                                                           "CPU Core #2.2",
+                                                                                           "CPU Core #3.2",
+                                                                                           "CPU Core #4.2",
+                                                                                           "CPU Core #5.2",
+                                                                                           "CPU Core #6.2")]), 2, as.numeric)),
+                                  cooler = rep("noctua", nrow(noctua_blender)),
+                                  noise = rep(58.75, nrow(noctua_blender)))
+
+blender <- rbind(stock_blender_subset, noctua_blender_subset)
+blender$temp <- as.numeric(blender$temp)
+blender$fan_speed <- as.numeric(blender$fan_speed)
+
+ggplot(data = blender, aes(x = second, y = temp)) + geom_point(aes(color=cooler)) +
+  scale_y_continuous(breaks = seq(min(blender$temp), max(blender$temp), 10), limits = c(min(blender$temp), max(blender$temp))) +
+  ggtitle("Blender CPU Temperatures by Cooler") +
+  xlab("time (s)") +
+  ylab("temperature (˚C)") +
+  scale_color_manual(values=c("#1289A7", "#ED4C67"))
+ggsave(file="blender_temp.svg", width=10, height=5)
+
+ggplot(data = blender, aes(x = second, y = fan_speed)) + geom_point(aes(color=cooler)) +
+  scale_y_continuous(breaks = seq(min(blender$fan_speed), max(blender$fan_speed), 100), limits = c(min(blender$fan_speed), max(blender$fan_speed))) +
+  ggtitle("Blender CPU Fan Speeds by Cooler") +
+  xlab("time (s)") +
+  ylab("fan speed (RPM)") +
+  scale_color_manual(values=c("#1289A7", "#ED4C67"))
+ggsave(file="blender_fan_speed.svg", width=10, height=5)
+
+ggplot(data = blender, aes(x = second, y = avg_core_speed)) + geom_point(aes(color=cooler)) +
+  scale_y_continuous(breaks = seq(min(blender$avg_core_speed), max(blender$avg_core_speed), 50), limits = c(min(blender$avg_core_speed), max(blender$avg_core_speed))) +
+  ggtitle("Blender CPU Clock Speeds by Cooler") +
+  xlab("time (s)") +
+  ylab("clock speed (MHz)") +
+  scale_color_manual(values=c("#1289A7", "#ED4C67"))
+ggsave(file="blender_clock_speed.svg", width=10, height=5)
 
