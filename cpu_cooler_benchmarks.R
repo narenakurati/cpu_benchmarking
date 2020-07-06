@@ -82,7 +82,7 @@ ggplot(data = cine, aes(x = second, y = temp)) + geom_point(aes(color=cooler)) +
   xlab("time (s)") +
   ylab("temperature (˚C)") +
   scale_color_manual(values=c("#1289A7", "#ED4C67"))
-ggsave(file="cine_temp.svg", width=10, height=5)
+ggsave(file="cine_temp.png", width=10, height=5)
   
 ggplot(data = cine, aes(x = second, y = fan_speed)) + geom_point(aes(color=cooler)) +
   scale_y_continuous(breaks = seq(min(cine$fan_speed), max(cine$fan_speed), 100), limits = c(min(cine$fan_speed), max(cine$fan_speed))) +
@@ -90,7 +90,7 @@ ggplot(data = cine, aes(x = second, y = fan_speed)) + geom_point(aes(color=coole
   xlab("time (s)") +
   ylab("fan speed (RPM)") +
   scale_color_manual(values=c("#1289A7", "#ED4C67"))
-ggsave(file="cine_fan_speed.svg", width=10, height=5)
+ggsave(file="cine_fan_speed.png", width=10, height=5)
 
 ggplot(data = cine, aes(x = second, y = avg_core_speed)) + geom_point(aes(color=cooler)) +
   scale_y_continuous(breaks = seq(min(cine$avg_core_speed), max(cine$avg_core_speed), 50), limits = c(min(cine$avg_core_speed), max(cine$avg_core_speed))) +
@@ -98,7 +98,7 @@ ggplot(data = cine, aes(x = second, y = avg_core_speed)) + geom_point(aes(color=
   xlab("time (s)") +
   ylab("clock speed (MHz)") +
   scale_color_manual(values=c("#1289A7", "#ED4C67"))
-ggsave(file="cine_clock_speed.svg", width=10, height=5)
+ggsave(file="cine_clock_speed.png", width=10, height=5)
 
 
 # Stock Blender -----------------------------------------------------------
@@ -175,7 +175,7 @@ ggplot(data = blender, aes(x = second, y = temp)) + geom_point(aes(color=cooler)
   xlab("time (s)") +
   ylab("temperature (˚C)") +
   scale_color_manual(values=c("#1289A7", "#ED4C67"))
-ggsave(file="blender_temp.svg", width=10, height=5)
+ggsave(file="blender_temp.png", width=10, height=5)
 
 ggplot(data = blender, aes(x = second, y = fan_speed)) + geom_point(aes(color=cooler)) +
   scale_y_continuous(breaks = seq(min(blender$fan_speed), max(blender$fan_speed), 100), limits = c(min(blender$fan_speed), max(blender$fan_speed))) +
@@ -183,7 +183,7 @@ ggplot(data = blender, aes(x = second, y = fan_speed)) + geom_point(aes(color=co
   xlab("time (s)") +
   ylab("fan speed (RPM)") +
   scale_color_manual(values=c("#1289A7", "#ED4C67"))
-ggsave(file="blender_fan_speed.svg", width=10, height=5)
+ggsave(file="blender_fan_speed.png", width=10, height=5)
 
 ggplot(data = blender, aes(x = second, y = avg_core_speed)) + geom_point(aes(color=cooler)) +
   scale_y_continuous(breaks = seq(min(blender$avg_core_speed), max(blender$avg_core_speed), 50), limits = c(min(blender$avg_core_speed), max(blender$avg_core_speed))) +
@@ -191,5 +191,5 @@ ggplot(data = blender, aes(x = second, y = avg_core_speed)) + geom_point(aes(col
   xlab("time (s)") +
   ylab("clock speed (MHz)") +
   scale_color_manual(values=c("#1289A7", "#ED4C67"))
-ggsave(file="blender_clock_speed.svg", width=10, height=5)
+ggsave(file="blender_clock_speed.png", width=10, height=5)
 
